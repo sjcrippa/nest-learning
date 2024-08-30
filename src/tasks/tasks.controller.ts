@@ -1,11 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
 
+import { TasksService } from './tasks.service';
+
 @Controller({})
 export class TaskController {
+  tasksService: TasksService;
+
+  constructor(tasksService: TasksService) {
+    this.tasksService = tasksService;
+  }
   @Get('/tasks')
   getAllTasks() {
-    // buscar en una bd
-    // peticion a otro backend o api
-    return 'Obteniendo todas las tareas';
+    return this.tasksService.getTasks();
   }
 }
